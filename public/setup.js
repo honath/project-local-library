@@ -1,1 +1,1 @@
-const module = { exports: {} };
+const module = { exports: { } };

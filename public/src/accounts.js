@@ -1,14 +1,53 @@
-function findAccountById(accounts, id) {}
+function findAccountById(accounts, id) 
+{
+  const foundAccount = accounts.find(account => account.id == id);
 
-function sortAccountsByLastName(accounts) {}
+  return foundAccount;
+}
 
-function numberOfBorrows(account, books) {}
+function sortAccountsByLastName(accounts)
+{
+    const sortedAccounts = accounts.sort((accountA, accountB) => accountA.name.last.toLowerCase() > accountB.name.last.toLowerCase() ? 1 : -1);
 
-function booksInPossession(account, books, authors) {}
+    return sortedAccounts;
+}
+
+function numberOfBorrows(account, books) 
+{
+  const id = account.id;
+  let totalBorrows = 0;
+  books.forEach(book => book.borrows.forEach(borrow => {
+    if (borrow.id == id)
+    {
+      totalBorrows++;
+    }
+  }));
+
+  return totalBorrows;
+}
+
+function getBooksPossessedByAccount(account, books, authors) 
+{
+  const id = account.id;
+  const checkedOutBooks = books.filter(book => book.borrows.some(borrow => borrow.id == id && !borrow.returned));
+  const result = addAuthorToBook(checkedOutBooks, authors);
+  return result;
+}
+
+function addAuthorToBook(books, authors)
+{
+  const condensedBooks = []; 
+  books.forEach(book => {
+    book.author = authors.find(author => author.id == book.authorId);
+    condensedBooks.push(book);
+  });
+  
+  return condensedBooks;
+}
 
 module.exports = {
   findAccountById,
   sortAccountsByLastName,
   numberOfBorrows,
-  booksInPossession,
+  getBooksPossessedByAccount,
 };

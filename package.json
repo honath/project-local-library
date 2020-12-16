@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
     "start": "live-server public/",
-    "test": "mocha tests/*.test.js"
+    "test": "mocha test/*.test.js"
   },
   "keywords": [],
   "author": "",
